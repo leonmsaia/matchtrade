@@ -1,9 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$appStatus['mode'] = 'development';
+$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+if (strpos($url, 'localhost') !== false) {
+	$appStatus['mode'] = 'development';
+}else{
+	$appStatus['mode'] = 'production';
+}
+
 if ($appStatus['mode'] == 'production') {
-  $config['base_url'] = '';
+  $config['base_url'] = 'https://matchtrade.herokuapp.com/';
 }elseif ($appStatus['mode'] == 'development'){
   $config['base_url'] = 'http://localhost/matchtrade';
 }
